@@ -6,6 +6,7 @@ import validateSchema from "./middlewares/validateSchema.js";
 import { createPhoneSchema } from "./protocols/schemas/phoneSchemas.js";
 import { createRechargeSchema } from "./protocols/schemas/rechargeSchema.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { getSummaryController } from "./controllers/summaryController.js";
 
 dotenv.config();
 
@@ -17,6 +18,8 @@ app.get("/phones/:cpf", getPhonesByCpfController);
 
 app.post("/recharges", validateSchema(createRechargeSchema), createRechargeController);
 app.get("/recharges/:number", getRechargesByNumberController);
+
+app.get("/summary/:cpf", getSummaryController);
 
 app.use(errorHandler);
 
