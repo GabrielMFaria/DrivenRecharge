@@ -8,7 +8,7 @@
     "module": "NodeNext",
     "target": "ES2020",
     "types": ["node"],
-    "moduleResolution": "node16",
+    "moduleResolution": "NodeNext",
     "forceConsistentCasingInFileNames": true,
 
     // Other Outputs

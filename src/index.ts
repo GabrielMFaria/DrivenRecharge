@@ -1,6 +1,6 @@
 import express, { type Request, type Response, type NextFunction } from "express";
 import dotenv from "dotenv";
-import { createPhoneController } from "./controllers/phoneController.js";
+import { createPhoneController, getPhonesByCpfController } from "./controllers/phoneController.js";
 import validateSchema from "./middlewares/validateSchema.js";
 import { createPhoneSchema } from "./protocols/schemas/phoneSchemas.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
@@ -12,7 +12,7 @@ app.use(express.json());
 
 
 app.post("/phones", validateSchema(createPhoneSchema), createPhoneController);
-
+app.get("/phones/:cpf", getPhonesByCpfController);
 
 app.use(errorHandler);
 

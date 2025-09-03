@@ -33,3 +33,11 @@ export async function registerPhone(phone: NewPhone) {
 
   return result.rows[0];
 }
+
+export async function listPhonesByCpf(cpf: string) {
+  const result = await databasePool.query(
+    "SELECT * FROM phones WHERE cpf = $1",
+    [cpf]
+  );
+  return result.rows; 
+}
