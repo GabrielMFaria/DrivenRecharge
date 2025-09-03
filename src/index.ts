@@ -1,8 +1,10 @@
-import express, { type Request, type Response, type NextFunction } from "express";
+import express from "express";
 import dotenv from "dotenv";
 import { createPhoneController, getPhonesByCpfController } from "./controllers/phoneController.js";
+import { createRechargeController, getRechargesByNumberController } from "./controllers/rechargeController.js";
 import validateSchema from "./middlewares/validateSchema.js";
 import { createPhoneSchema } from "./protocols/schemas/phoneSchemas.js";
+import { createRechargeSchema } from "./protocols/schemas/rechargeSchema.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 dotenv.config();
@@ -10,9 +12,11 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-
 app.post("/phones", validateSchema(createPhoneSchema), createPhoneController);
 app.get("/phones/:cpf", getPhonesByCpfController);
+
+app.post("/recharges", validateSchema(createRechargeSchema), createRechargeController);
+app.get("/recharges/:number", getRechargesByNumberController);
 
 app.use(errorHandler);
 

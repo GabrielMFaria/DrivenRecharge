@@ -17,3 +17,10 @@ CREATE TABLE phones (
   description TEXT NOT NULL,
   cpf VARCHAR(11) NOT NULL
 );
+
+CREATE TABLE recharges (
+  id SERIAL PRIMARY KEY,
+  phone_number VARCHAR(20) REFERENCES phones(number),
+  value NUMERIC(10,2) NOT NULL CHECK (value >= 10 AND value <= 1000),
+  created_at TIMESTAMP DEFAULT NOW()
+);
