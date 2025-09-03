@@ -1,4 +1,4 @@
 export type NewRecharge = {
-  phoneNumber: string;
-  value: number;
+  phoneId: number;
+  amount: number;
 };
