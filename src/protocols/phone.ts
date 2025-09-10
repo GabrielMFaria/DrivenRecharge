@@ -13,5 +13,5 @@ export type Phone = {
   name: string;
   description: string;
   cpf: string;
-  created_at: Date;
+  createdAt: Date;
 };

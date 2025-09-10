@@ -1,16 +1,6 @@
-import type { Summary, PhoneSummary, RechargeSummary } from "../protocols/summary.js";
-import { getPhonesByCpfFromDB, getRechargesByPhoneIdFromDB } from "../repositories/summaryRepo.js";
+import { getSummaryByCpfFromDB } from "../repositories/summaryRepo.js";
+import type { Summary } from "../protocols/summary.js";
 
 export async function getSummaryByCpf(cpf: string): Promise<Summary> {
-  const phones: PhoneSummary[] = await getPhonesByCpfFromDB(cpf);
-
-  for (const phone of phones) {
-    const recharges: RechargeSummary[] = await getRechargesByPhoneIdFromDB(phone.id);
-    phone.recharges = recharges;
-  }
-
-  return {
-    document: cpf,
-    phones
-  };
+  return await getSummaryByCpfFromDB(cpf);
 }

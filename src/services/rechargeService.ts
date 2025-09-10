@@ -1,8 +1,8 @@
-import { insertRecharge, findRechargesByPhoneId } from "../repositories/rechargeRepo.js";
-import { findPhoneById } from "../repositories/phoneRepo.js"; 
+import { insertRecharge, findRechargesByPhoneNumber } from "../repositories/rechargeRepo.js";
+import { findPhoneByNumber } from "../repositories/phoneRepo.js";
 
-export async function createRecharge(phoneId: number, amount: number) {
-  const phone = await findPhoneById(phoneId);
+export async function createRecharge(phoneNumber: string, amount: number) {
+  const phone = await findPhoneByNumber(phoneNumber);
   if (!phone) {
     const error = new Error("Telefone não encontrado.");
     (error as any).status = 404;
@@ -15,9 +15,9 @@ export async function createRecharge(phoneId: number, amount: number) {
     throw error;
   }
 
-  return await insertRecharge(phoneId, amount);
+  return await insertRecharge(phoneNumber, amount);
 }
 
-export async function listRechargesByPhoneId(phoneId: number) {
-  return await findRechargesByPhoneId(phoneId);
+export async function listRechargesByPhoneNumber(phoneNumber: string) {
+  return await findRechargesByPhoneNumber(phoneNumber);
 }

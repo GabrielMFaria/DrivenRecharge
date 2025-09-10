@@ -1,11 +1,11 @@
-export type NewRecharge = {
-  phoneId: number;
+export interface NewRecharge {
+  phoneNumber: string; 
   amount: number;
-};
+}
 
-export type Recharge = {
+export interface Recharge {
   id: number;
-  phoneId: number;
+  phoneNumber: string; 
   amount: number;
-  created_at: Date;
-};
+  createdAt: string;
+}

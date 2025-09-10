@@ -4,10 +4,10 @@ import type { QueryResult } from "pg";
 
 export async function insertPhone(phone: NewPhone): Promise<Phone> {
   const result: QueryResult<Phone> = await databasePool.query(
-    `INSERT INTO phones (cpf, number)
-     VALUES ($1, $2)
-     RETURNING id, cpf, number, created_at AS "createdAt"`,
-    [phone.cpf, phone.number]
+    `INSERT INTO phones (number, carrier_id, name, description, cpf)
+     VALUES ($1, $2, $3, $4, $5)
+     RETURNING id, number, carrier_id AS "carrierId", name, description, cpf, created_at AS "createdAt"`,
+    [phone.number, phone.carrierId, phone.name, phone.description, phone.cpf]
   );
 
   const newPhone = result.rows[0];

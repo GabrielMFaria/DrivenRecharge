@@ -1,6 +1,6 @@
 export type RechargeSummary = {
   id: number;
-  phoneId: number;
+  phoneNumber: string; 
   amount: number;
   createdAt: string;
 };
@@ -22,6 +22,6 @@ export type PhoneSummary = {
 };
 
 export type Summary = {
-  document: string;
+  document: string; 
   phones: PhoneSummary[];
 };

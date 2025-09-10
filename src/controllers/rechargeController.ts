@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import type { NewRecharge } from "../protocols/recharge.js";
-import { createRecharge, listRechargesByPhoneId } from "../services/rechargeService.js";
+import { createRecharge, listRechargesByPhoneNumber } from "../services/rechargeService.js";
 
 export async function createRechargeController(
   req: Request<{}, {}, NewRecharge>,
@@ -8,15 +8,12 @@ export async function createRechargeController(
   next: NextFunction
 ) {
   try {
-    const { phoneId, amount } = req.body;
-    const newRecharge = await createRecharge(phoneId, amount);
+    const { phoneNumber, amount } = req.body;
+    const newRecharge = await createRecharge(phoneNumber, amount);
     res.status(201).send(newRecharge);
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      next(err);
-    } else {
-      next(new Error("Erro desconhecido"));
-    }
+    if (err instanceof Error) next(err);
+    else next(new Error("Erro desconhecido"));
   }
 }
 
@@ -29,13 +26,10 @@ export async function getRechargesByNumberController(
     const { number } = req.params;
     if (!number) return res.status(400).send({ error: "Número é obrigatório" });
 
-    const recharges = await listRechargesByPhoneId(Number(number));
+    const recharges = await listRechargesByPhoneNumber(number);
     res.status(200).send(recharges);
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      next(err);
-    } else {
-      next(new Error("Erro desconhecido"));
-    }
+    if (err instanceof Error) next(err);
+    else next(new Error("Erro desconhecido"));
   }
 }

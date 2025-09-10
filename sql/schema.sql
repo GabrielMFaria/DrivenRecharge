@@ -21,7 +21,7 @@ CREATE TABLE phones (
 
 CREATE TABLE recharges (
   id SERIAL PRIMARY KEY,
-  phone_id INT REFERENCES phones(id),
+  phone_number VARCHAR(20) REFERENCES phones(number),
   amount NUMERIC(10,2) NOT NULL CHECK (amount >= 10 AND amount <= 1000),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
