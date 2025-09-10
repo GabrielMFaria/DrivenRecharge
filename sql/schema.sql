@@ -15,7 +15,8 @@ CREATE TABLE phones (
   carrier_id INT REFERENCES carriers(id),
   name VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
-  cpf VARCHAR(14) NOT NULL
+  cpf VARCHAR(14) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE recharges (
